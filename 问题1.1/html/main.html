@@ -1,0 +1,160 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>main</title><meta name="generator" content="MATLAB 9.0"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2019-09-23"><meta name="DC.source" content="main.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><pre class="codeinput">clear <span class="string">all</span>;close <span class="string">all</span>; clc;
+<span class="keyword">global</span> Psi f PM
+Phi = 0;<span class="comment">%&#32469;x&#36724;&#26059;&#36716;&#35282;&#24230;</span>
+Psi =5*pi/180;<span class="comment">%&#32469;y&#36724;&#26059;&#36716;&#35282;&#24230;</span>
+Theta =0;<span class="comment">%&#32469;z&#36724;&#26059;&#36716;&#35282;&#24230;</span>
+x0 = -1.75;<span class="comment">%x&#24179;&#31227;&#37327;</span>
+y0 = 0;<span class="comment">%y&#24179;&#31227;&#37327;</span>
+z0 = 0;<span class="comment">%z&#24179;&#31227;&#37327;</span>
+f =45e-3;<span class="comment">%45mm&#30456;&#26426;</span>
+dx = 0.026e-2;<span class="comment">%&#19968;&#20010;&#20687;&#32032;&#30340;&#38271;</span>
+dy = 0.026e-2;<span class="comment">%&#19968;&#20010;&#20687;&#32032;&#30340;&#23485;</span>
+u0 = 1000;<span class="comment">%&#22270;&#20687;&#24179;&#38754;&#20013;&#24515;&#20687;&#32032;</span>
+v0 =750;<span class="comment">%&#22270;&#20687;&#24179;&#38754;&#20013;&#24515;&#20687;&#32032;</span>
+PM=pixel(dx,dy,u0,v0);<span class="comment">%1&#20687;&#32032;&#65309;0.635&#21400;&#31859;&divide;24&#8776;0.026458&#21400;&#31859;</span>
+A=[480 703 1]';B=[1230 614 1]';
+h=-x0;
+[ Ay,Az ]=groundx(A,h,0);
+[ By,Bz ]=groundx(B,h,0);
+d=sqrt((Ay-By)^2+(Az-Bz)^2)
+<span class="comment">%&#35745;&#31639;&#25293;&#29031;&#30528;&#36317;&#31163;&#39532;&#36335;&#36793;&#32536;&#30340;&#36317;&#31163;</span>
+PB=[999 1175 1]';
+inputb=inv(PM)*PB;
+[ Yw4,Zw4 ]=groundx(PB,h,0);
+PC=[625 1500 1]';
+[ Yw5,Zw5]=groundx(PC,h,0);
+BC=sqrt((Yw4-Yw5)^2+(Zw4-Zw5)^2);
+s=-Zw4*Yw5/BC
+<span class="comment">%&#35823;&#24046;&#20998;&#26512;&#65306;&#25252;&#26639;&#38388;&#36317;</span>
+e=[425 1085 1]';E=[974 869 1]';
+[ ey,ez ]=groundx(e,h,0);
+[ Ey,Ez ]=groundx(E,h,0);
+L_e=sqrt((ey-Ey)^2+(ez-Ez)^2)
+de=abs(3.08-L_e)/3.08
+openfig(<span class="string">'F1.fig'</span>);
+</pre><pre class="codeoutput">
+d =
+
+   32.7847
+
+
+s =
+
+    0.5134
+
+
+L_e =
+
+    2.9058
+
+
+de =
+
+    0.0566
+
+</pre><img vspace="5" hspace="5" src="main_01.png" style="width:1536px;height:746px;" alt=""> <p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2016a</a><br></p></div><!--
+##### SOURCE BEGIN #####
+clear all;close all; clc;
+global Psi f PM
+Phi = 0;%绕x轴旋转角度
+Psi =5*pi/180;%绕y轴旋转角度
+Theta =0;%绕z轴旋转角度
+x0 = -1.75;%x平移量
+y0 = 0;%y平移量
+z0 = 0;%z平移量
+f =45e-3;%45mm相机
+dx = 0.026e-2;%一个像素的长
+dy = 0.026e-2;%一个像素的宽
+u0 = 1000;%图像平面中心像素
+v0 =750;%图像平面中心像素
+PM=pixel(dx,dy,u0,v0);%1像素＝0.635厘米÷24≈0.026458厘米
+A=[480 703 1]';B=[1230 614 1]';
+h=-x0;
+[ Ay,Az ]=groundx(A,h,0);
+[ By,Bz ]=groundx(B,h,0);
+d=sqrt((Ay-By)^2+(Az-Bz)^2)
+%计算拍照着距离马路边缘的距离
+PB=[999 1175 1]';
+inputb=inv(PM)*PB;
+[ Yw4,Zw4 ]=groundx(PB,h,0);
+PC=[625 1500 1]';
+[ Yw5,Zw5]=groundx(PC,h,0);
+BC=sqrt((Yw4-Yw5)^2+(Zw4-Zw5)^2);
+s=-Zw4*Yw5/BC
+%误差分析：护栏间距
+e=[425 1085 1]';E=[974 869 1]';
+[ ey,ez ]=groundx(e,h,0);
+[ Ey,Ez ]=groundx(E,h,0);
+L_e=sqrt((ey-Ey)^2+(ez-Ez)^2)
+de=abs(3.08-L_e)/3.08
+openfig('F1.fig');
+##### SOURCE END #####
+--></body></html>
